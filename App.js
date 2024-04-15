@@ -7,13 +7,20 @@ import UserScreen from "./screens/UserScreen";
 import Wischlist from "./screens/Wischlist";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import Header from "./components/Header";
+import { Provider } from "react-redux";
+import { configureStore } from "@reduxjs/toolkit";
+import book from './reducers/books';
 
 import { FontAwesome } from "@expo/vector-icons";
 
 const Tab = createBottomTabNavigator();
+const store = configureStore({
+  reducer: { book },
+});
 
 export default function App() {
   return (
+    <Provider store={store}>
     <SafeAreaProvider>
       <NavigationContainer>
         <Tab.Navigator
@@ -84,6 +91,7 @@ export default function App() {
         </Tab.Navigator>
       </NavigationContainer>
     </SafeAreaProvider>
+    </Provider>
   );
 }
 
